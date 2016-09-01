@@ -6,23 +6,26 @@ using namespace System::IO;
 using namespace System::Text;
 using namespace System::Threading;
 
+public ref class LoadFromObj
+{
 
-void LoadFromFile(System::Windows::Forms::OpenFileDialog^  openFileDialog,
-		System::Windows::Forms::RichTextBox^  richTextBox, System::Windows::Forms::RichTextBox^  v,
-		System::Windows::Forms::RichTextBox^  vt, System::Windows::Forms::RichTextBox^  vn,
-		System::Windows::Forms::RichTextBox^  f)
-	{
-		openFileDialog->Filter = "Files|*.obj";
-		openFileDialog->FileName = "";
+public: 
+static  System::Windows::Forms::OpenFileDialog^  openFileDialog;
+static	System::Windows::Forms::RichTextBox^  richTextBox;
+static	System::Windows::Forms::RichTextBox^  v;
+static	System::Windows::Forms::RichTextBox^  vt;
+static	System::Windows::Forms::RichTextBox^  vn;
+static	System::Windows::Forms::RichTextBox^  f;
+
+
+public:
+	void LoadFromFile()
+	{	
 		Encoding ^enc;
-		if (openFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-		{
-			richTextBox->Text = File::ReadAllText(openFileDialog->FileName, enc->GetEncoding("windows-1251"));
+		richTextBox->Text = File::ReadAllText(openFileDialog->FileName, enc->GetEncoding("windows-1251"));
 
-			String^ varv = "v ";
-			String^ varvt = "vt";
-			String^ varvn = "vn";
-			String^ varf = "f ";
+
+			String^ varv = "v ";String^ varvt = "vt";String^ varvn = "vn";String^ varf = "f ";
 			int i = 0;
 			while (richTextBox->Lines[i] != "")
 			{
@@ -48,12 +51,6 @@ void LoadFromFile(System::Windows::Forms::OpenFileDialog^  openFileDialog,
 					f->Text += buf;
 				}
 				i++;
-			}
-		}
+			}	
 	}
-
-
-  
-
-
-
+};

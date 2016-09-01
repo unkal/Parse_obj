@@ -1,5 +1,6 @@
 ﻿  MainForm.cpp
-c:\users\lord\documents\visual studio 2015\projects\p1\p1\Load.h(17): warning C4101: 'enc': unreferenced local variable
+c:\users\lord\documents\github\parse_obj\p1\Load.h(34): warning C4101: 'enc': unreferenced local variable
+c:\users\lord\documents\github\parse_obj\p1\MainForm.h(58): warning C4101: 'enc': unreferenced local variable
   MainForm.obj : /DEBUG:FASTLINK is not supported when managed code is present; restarting link with /DEBUG:FULL
-  P1.vcxproj -> C:\Users\Lord\documents\visual studio 2015\Projects\P1\Debug\P1.exe
-  P1.vcxproj -> C:\Users\Lord\documents\visual studio 2015\Projects\P1\Debug\P1.pdb (Partial PDB)
+  P1.vcxproj -> C:\Users\Lord\Documents\GitHub\Parse_obj\Debug\P1.exe
+  P1.vcxproj -> C:\Users\Lord\Documents\GitHub\Parse_obj\Debug\P1.pdb (Partial PDB)

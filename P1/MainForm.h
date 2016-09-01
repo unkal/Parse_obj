@@ -14,7 +14,6 @@ namespace P1 {
 	/// <summary>
 	/// Summary for MainForm
 	/// </summary>
-
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
 	public:
@@ -45,6 +44,55 @@ namespace P1 {
 	private: System::Windows::Forms::RichTextBox^  vn;
 	private: System::Windows::Forms::RichTextBox^  f;
 
+	delegate void SetVoidDelegate();
+
+	private: System::Void ChangeText()
+	{
+		if (this->richTextBox1->InvokeRequired)
+		{
+			SetVoidDelegate^ d = gcnew SetVoidDelegate(this, &MainForm::ChangeText);
+			this->Invoke(d);
+		}
+		else
+		{
+			Encoding ^enc;
+			richTextBox1->Text = File::ReadAllText(openFileDialog1->FileName, enc->GetEncoding("windows-1251"));
+			String^ varv = "v ";String^ varvt = "vt";String^ varvn = "vn";String^ varf = "f ";
+			int i = 0;
+			while (richTextBox1->Lines[i] != "")
+			{
+				String^ buf = "\n" + richTextBox1->Lines[i];
+				//////
+				if (buf->IndexOf(varv) != -1)
+				{
+					v->Text += buf;
+				}
+				/////
+				if (buf->IndexOf(varvt) != -1)
+				{
+					vt->Text += buf;
+				}
+				/////
+				if (buf->IndexOf(varvn) != -1)
+				{
+					vn->Text += buf;
+				}
+				//////
+				if (buf->IndexOf(varf) != -1)
+				{
+					f->Text += buf;
+				}
+				i++;
+			}
+		}
+	}
+
+	public:	void LoadFromFile()
+		{
+			
+			this->ChangeText();
+
+		}
 
 
 
@@ -156,10 +204,25 @@ namespace P1 {
 		}
 #pragma endregion
 
+
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-
-		LoadFromFile(openFileDialog1, richTextBox1, v, vt, vn, f);
-
+		openFileDialog1->Filter = "Files|*.obj";
+		openFileDialog1->FileName = "";		
+		if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		{
+			/*		LoadFromObj^ LFO = gcnew LoadFromObj;
+					LFO->openFileDialog = openFileDialog1;
+					LFO->richTextBox = richTextBox1;
+					LFO->v = v;
+					LFO->vt = vt;
+					LFO->vn = vn;
+					LFO->f = f;
+			*/
+		}
+			Thread^ th = gcnew Thread(gcnew ThreadStart(this, &MainForm::LoadFromFile));
+		
+			th->Start();
+				
 	}
 	};
 }
